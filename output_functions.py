@@ -52,9 +52,9 @@ def printBye():
     print("\n\n########### Bye ###########\n")
 
 def printSuccess(user, passToCrack, passwd):
-    printFront('V', col.OKGREEN)
+    printFront('†', col.OKGREEN)
     print (passToCrack + " from " + user + col.OKGREEN + " CRACKED" + col.ENDC)
-    printFront('V', col.OKGREEN)
+    printFront('†', col.OKGREEN)
     print ("password: \"" + passwd.strip('\n') + "\"\n")
 
 def printFailure(user, passToCrack, hashName):
@@ -62,3 +62,8 @@ def printFailure(user, passToCrack, hashName):
     print ("PASSWORD" + col.FAIL + " RESISTED " + col.ENDC + "with " + hashName + " hash cracking")
     printFront('X', col.FAIL)
     print (user + ':' + passToCrack + " still remain\n")
+
+def printWhereFindOutput():
+    print ("\n\n")
+    printFront('!', col.LOWRED)
+    print (col.BOLD + "OUTPUT IN: " + col.FAIL + col.UNDERLINE + "crackingResult.passwd" + col.ENDC)
