@@ -1,8 +1,3 @@
-
-.______________________________________________________|_._._._._._._._._._.
-\\_____________________________________________________|_#_#_#_#_#_#_#_#_#_|
-                                                       l
-
 # HASH_CRACKER
 
 Hash_cracker is a script for cracking password's hash from a dictionnary file.
@@ -31,7 +26,3 @@ The exemple below is directly reproductible after a clone of the repo
 ```
 python3 hash_cracker all exeple_logsToCrack.txt dictPasswd.txt
 ```
-
-.______________________________________________________|_._._._._._._._._._.
-\\_____________________________________________________|_#_#_#_#_#_#_#_#_#_|
-                                                       l
