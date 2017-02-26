@@ -49,7 +49,10 @@ def errorInHash(hashName):
     return False
 
 def printBye():
-    print("\n\n########### Bye ###########\n")
+    print (".______________________________________________________|_._._._._._._._._._.")
+    print (" \\_____________________________________________________|_#_#_#_#_#_#_#_#_#_|")
+    print ("                                                       l")
+
 
 def printSuccess(user, passToCrack, passwd):
     printFront('†', col.OKGREEN)
@@ -66,4 +69,4 @@ def printFailure(user, passToCrack, hashName):
 def printWhereFindOutput():
     print ("\n\n")
     printFront('!', col.LOWRED)
-    print (col.BOLD + "OUTPUT IN: " + col.FAIL + col.UNDERLINE + "crackingResult.passwd" + col.ENDC)
+    print ("      " + col.BOLD + "OUTPUT IN: " + col.FAIL + col.UNDERLINE + "crackingResult.passwd" + col.ENDC)
