@@ -26,3 +26,11 @@ The exemple below is directly reproductible after a clone of the repo
 ```
 python3 hash_cracker all exeple_logsToCrack.txt dictPasswd.txt
 ```
+
+```
+To be a warrior is not a simple matter of wishing to be one. It is rather 
+an endless struggle that will go on to the very last moment of our lives. 
+Nobody is born a warrior, in exactly the same way that nobody is born 
+an average man. We make ourselves into one or the other
+--Kokoro by Natsume So-sek, 1914, Japan.
+```
