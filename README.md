@@ -24,8 +24,13 @@ python3 hash_cracker <hash_type> <login_file> <dictionnary file>
 The exemple below is directly reproductible after a clone of the repo
 
 ```
-python3 hash_cracker all exeple_logsToCrack.txt dictPasswd.txt
+python3 hash_cracker all exemple_logsToCrack.txt dictPasswd.txt
 ```
+
+### Dictionniary source
+You can find on [cracking-station](https://crackstation.net/buy-crackstation-wordlist-password-cracking-dictionary.htm) one of the biggest password dictionnary.
+
+
 
 ```
 To be a warrior is not a simple matter of wishing to be one. It is rather 
