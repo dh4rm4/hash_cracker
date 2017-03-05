@@ -8,10 +8,6 @@ import optparse
 
 from output_functions import *
 
-#global hashType, logsToCrack, dictFile
-#hashType	= ""
-#logsToCrack	= ""
-#dictFile	= ""
 result		= {}
 
 ###################################
@@ -48,7 +44,7 @@ def parserCmd():
     dictFile = options.dictFile
     if(trueArg(hashType, logsToCrack, dictFile) == False):
         print (parser.usage)
-        return None
+        return None, None, None
     return hashType, logsToCrack, dictFile
 
 
