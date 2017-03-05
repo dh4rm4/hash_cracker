@@ -4,13 +4,15 @@ import os
 import crypt
 import sys
 import hashlib
+import optparse
 
 from output_functions import *
 
-hashType    = sys.argv[1]
-LogsToCrack = sys.argv[2]
-DictFile    = sys.argv[3]
-result      = {}
+#global hashType, logsToCrack, dictFile
+#hashType	= ""
+#logsToCrack	= ""
+#dictFile	= ""
+result		= {}
 
 ###################################
 #                                 #
@@ -19,18 +21,42 @@ result      = {}
 ###################################
 
 def main():
-    if (areArgsValids() == True):
-        startCracking()
+    hashType, logsToCrack, dictFile = parserCmd()
+    if (trueArg(hashType, logsToCrack, dictFile) == True and
+        areArgsValids(hashType, logsToCrack, dictFile) == True):
+        startCracking(hashType, logsToCrack, dictFile)
         writeResultInFile()
     printBye()
 
-def areArgsValids():
-    if len(sys.argv) != 4:
-        return argLenError()
-    if isNotValidFile(LogsToCrack) or isNotValidFile(DictFile):
+def trueArg(hashType, logsToCrack, dictFile):
+    if (hashType == None) or (logsToCrack == None) or (dictFile == None):
         return False
-    if isNotValidHash():
-        return errorInHash(HashType)
+    return True
+
+def parserCmd():
+    parser = optparse.OptionParser(col.BOLD + '    Usage:'+ col.ENDC +  \
+    ' hash_crack --hash <hash_type> ' + '-s <fileToCrack> ' + '-d <dict_file>')
+    parser.add_option('--hash', dest='hashType', type='string', \
+                      help='type of hash to crack')
+    parser.add_option('-s', dest='logsToCrack', type='string',  \
+                      help='file with login/pass to crack')
+    parser.add_option('-d', dest='dictFile', type='string',     \
+                      help='dicionnary password')
+    (options, args) = parser.parse_args()
+    hashType = options.hashType
+    logsToCrack = options.logsToCrack
+    dictFile = options.dictFile
+    if(trueArg(hashType, logsToCrack, dictFile) == False):
+        print (parser.usage)
+        return None
+    return hashType, logsToCrack, dictFile
+
+
+def areArgsValids(hashType, logsToCrack, dictFile):
+    if isNotValidFile(logsToCrack) or isNotValidFile(dictFile):
+        return False
+    if isNotValidHash(hashType):
+        return errorInHash(hashType)
     return True
 
 def isNotValidFile(filename):
@@ -40,14 +66,14 @@ def isNotValidFile(filename):
         return wrongPermOnFile(filename)
     return False
 
-def isNotValidHash():
-    validHash = ("all", "unix_crypt", "md5", "sha256", "sha512")
+def isNotValidHash(hashType):
+    validHash = ('all', 'unix_crypt', 'md5', 'sha256', 'sha512')
     return not (hashType.lower() in validHash)
 
 def writeResultInFile():
-    with open("crackingResult.passwd", "a+") as res:
+    with open('crackingResult.passwd', 'a+') as res:
         for user in result:
-            res.write(user + ":" + result[user])
+            res.write(user + ':' + result[user])
     printWhereFindOutput()
 
 
@@ -57,16 +83,16 @@ def writeResultInFile():
 #                                 #
 ###################################
 
-def startCracking():
-    logFile = open(LogsToCrack)
+def startCracking(hashType, logsToCrack, dictFile):
+    logFile = open(logsToCrack)
     for line in logFile.readlines():
         passToCrack = line.split(':')[1].strip('\n')
         user        = line.split(':')[0]
-        hashName    = setHashName()
+        hashName    = setHashName(hashType)
         for hsh in hashName:
             printFront('+', col.YELLOW)
-            print ("Start cracking with " + hsh + " hash")
-            res = redirectHsh(hsh, DictFile, passToCrack)
+            print ('Start cracking with ' + hsh + ' hash')
+            res = redirectHsh(hsh, dictFile, passToCrack)
             if (res != False):
                 addSolution(user, res)
                 printSuccess(user, passToCrack, res)
@@ -75,21 +101,21 @@ def startCracking():
                 printFailure(user, passToCrack, hsh)
 
 
-def setHashName():
+def setHashName(hashType):
     hashName = hashType.lower()
-    if (hashName == "all"):
-        return ["unix_crypt", "md5", "sha256", "sha512"]
+    if (hashName == 'all'):
+        return ['unix_crypt', 'md5', 'sha256', 'sha512']
     return [hashName]
 
 
 def redirectHsh(hsh, filename, passToCrack):
-    if (hsh == "unix_crypt"):
+    if (hsh == 'unix_crypt'):
         return crackUnixCrypt(filename, passToCrack)
-    elif (hsh == "md5"):
+    elif (hsh == 'md5'):
         return crackMD5(filename, passToCrack)
-    elif (hsh == "sha256"):
+    elif (hsh == 'sha256'):
         return crackSHA256(filename, passToCrack)
-    elif (hsh == "sha512"):
+    elif (hsh == 'sha512'):
         return crackSHA512(filename, passToCrack)
     return False
 

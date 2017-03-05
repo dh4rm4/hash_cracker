@@ -23,20 +23,10 @@ def printError():
 def printFront(c, color):
     print (col.BOLD + "[" + color + c + col.ENDC + col.BOLD + "] " + col.ENDC, end='')
 
-def printUsage():
-    print (col.BOLD + "    Usage:"+ col.ENDC +  " py3 hash_crack <hash_type*> <fileToCrack> <dict_file>")
-    print ("     *hash_type: All / UNIX_crypt / SHA256 / SHA512")
-    print ("     fileToCrack: must contain format: \"user:passwd\"")
-
-def argLenError():
-    printError()
-    print ("number of arguments is not valid.")
-    printUsage()
-    return False
-
 def fileDoNotExist(filename):
     printError()
     print (filename + " does not exist")
+    return 1
 
 def wrongPermOnFile(filename):
     printError()
@@ -45,11 +35,11 @@ def wrongPermOnFile(filename):
 def errorInHash(hashName):
     printError()
     print ("\"" + hashName + "\" is not a valid hash")
-    printUsage()
+    print ("     *hash_type: All / UNIX_crypt / SHA256 / SHA512")
     return False
 
 def printBye():
-    print (".______________________________________________________|_._._._._._._._._._.")
+    print ("\n\n.______________________________________________________|_._._._._._._._._._.")
     print (" \\_____________________________________________________|_#_#_#_#_#_#_#_#_#_|")
     print ("                                                       l")
 
