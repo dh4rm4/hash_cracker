@@ -17,14 +17,14 @@ If you still live in the past, you can delete all the output function to make it
 
 ## Usage
 ```
-python3 hash_cracker <hash_type> <login_file> <dictionnary file>
+python3 hash_cracker --hash <hash_type> -s <fileToCrack> -d <dict_file>
 * hash_type  : all / UNIX_crypt / md5 / SHA256 / SHA512
 * login_file : should only contain format: "user:password"
 ```
 The exemple below is directly reproductible after a clone of the repo
 
 ```
-python3 hash_cracker all exemple_logsToCrack.txt dictPasswd.txt
+python3 hash_cracker --hash all -s exemple_logsToCrack.txt -d dictPasswd.txt
 ```
 
 ### Dictionniary source
@@ -33,9 +33,9 @@ You can find on [cracking-station](https://crackstation.net/buy-crackstation-wor
 
 
 ```
-To be a warrior is not a simple matter of wishing to be one. It is rather 
-an endless struggle that will go on to the very last moment of our lives. 
-Nobody is born a warrior, in exactly the same way that nobody is born 
+To be a warrior is not a simple matter of wishing to be one. It is rather
+an endless struggle that will go on to the very last moment of our lives.
+Nobody is born a warrior, in exactly the same way that nobody is born
 an average man. We make ourselves into one or the other
 --Kokoro by Natsume So-sek, 1914, Japan.
 ```
